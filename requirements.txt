@@ -1,0 +1,6 @@
+This file lists the Python packages needed for our project.The conda install -c anaconda flask mysql-connector-python -c conda-forge python-dotenv flask-bcrypt flask-jwt-extended -y command will install all of these.Flask==2.2.2    
+# The main web framework we will use.mysql-connector-python==8.0.31 
+# The official driver to connect Python to our MySQL database.python-dotenv==0.21.0    
+# Helps us manage secret keys and database passwords safely.Flask-Bcrypt==1.0.1  
+# For securely hashing user passwords.Flask-JWT-Extended==4.4.4 
+# For handling user authentication with JSON Web Tokens (JWT).
