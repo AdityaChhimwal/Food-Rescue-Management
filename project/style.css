@@ -1,4 +1,4 @@
-/* General Body and Font Styling */
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: #f4f7f6;
@@ -7,14 +7,13 @@ body {
     padding: 0;
 }
 
-/* A main container to center our content */
 .container {
     max-width: 900px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
-/* Navigation Bar Styling */
+
 nav {
     background-color: #2a9d8f;
     color: white;
@@ -30,7 +29,7 @@ nav h1 {
     font-size: 1.5em;
 }
 
-/* General Card Styling for content sections */
+
 .card {
     background-color: white;
     padding: 30px;
@@ -39,11 +38,11 @@ nav h1 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-/* Styling for all form elements */
+
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Adds space between form elements */
+    gap: 15px; 
 }
 
 h2 {
@@ -61,7 +60,7 @@ textarea {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    box-sizing: border-box; 
 }
 
 textarea {
@@ -85,7 +84,7 @@ button:hover {
     background-color: #f4a261;
 }
 
-/* Styling for the food listing items */
+
 #listings-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -105,12 +104,12 @@ button:hover {
     color: #2a9d8f;
 }
 
-/* Utility class to hide/show elements */
+
 .hidden {
     display: none !important;
 }
 
-/* Simple responsive design for smaller screens */
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;

@@ -3,11 +3,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Global Variables & Constants ---
+    //  Global Variables & Constants 
     const API_URL = 'http://127.0.0.1:5000';
     const $ = (selector) => document.querySelector(selector);
 
-    // --- Element Selectors ---
+    //  Element Selectors 
     const loginSection = $('#login-section');
     const loginForm = $('#login-form');
     const registerFormContainer = $('#register-form-container');
@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const addListingForm = $('#add-listing-form');
     const listingsContainer = $('#listings-container');
 
-    // --- State Management ---
+    //  State Management 
     const state = {
         token: localStorage.getItem('authToken'),
     };
 
-    // --- Functions ---
+
 
     /**
      * Fetches all available food listings from the backend and displays them.
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Event Listeners ---
+    //  Event Listeners 
 
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();

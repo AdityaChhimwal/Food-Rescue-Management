@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token
 from project import bcrypt
 from project.models.user_model import create_user, find_user_by_email
 
-# A Blueprint is an organized set of routes for a specific part of our app.
+
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/register', methods=['POST'])
@@ -45,8 +45,7 @@ def login():
     if not user or not bcrypt.check_password_hash(user['password_hash'], password):
         return jsonify({'message': 'Invalid credentials'}), 401
     
-    # --- THIS IS THE CORRECTED LINE ---
-    # We convert the user's integer ID to a string before creating the token.
+
     access_token = create_access_token(identity=str(user['id']))
     
     return jsonify({'access_token': access_token})

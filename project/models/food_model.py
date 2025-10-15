@@ -1,7 +1,7 @@
 # This is our "Food Filing Clerk".
-# This version uses the new, robust, shared database connection.
 
-from project.db import get_db # <-- CHANGE: Import get_db
+
+from project.db import get_db 
 
 def add_food_listing(business_id, title, description, quantity, price, expiry_time):
     """
@@ -12,7 +12,7 @@ def add_food_listing(business_id, title, description, quantity, price, expiry_ti
         safe_quantity = int(quantity)
         safe_price = float(price)
 
-        conn = get_db() # <-- CHANGE: Use the new get_db() function
+        conn = get_db() 
         cursor = conn.cursor()
         
         sql = """
@@ -26,7 +26,7 @@ def add_food_listing(business_id, title, description, quantity, price, expiry_ti
         conn.commit()
         
         cursor.close()
-        # No conn.close() needed here anymore!
+        
         return True
     except Exception as e:
         print(f"Database error in add_food_listing: {e}")
@@ -40,7 +40,7 @@ def get_all_available_listings():
     """
     listings = []
     try:
-        conn = get_db() # <-- CHANGE: Use the new get_db() function
+        conn = get_db() 
         cursor = conn.cursor(dictionary=True)
         
         sql = """
@@ -57,7 +57,7 @@ def get_all_available_listings():
         listings = cursor.fetchall()
         
         cursor.close()
-        # No conn.close() needed here anymore!
+        
     except Exception as e:
         print(f"Database error in get_all_available_listings: {e}")
 

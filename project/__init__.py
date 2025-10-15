@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# --- NEW: Import the entire db module ---
+
 from . import db
 
 load_dotenv()
@@ -23,10 +23,10 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
 
-    # --- NEW: Initialize our database manager ---
+
     db.init_app(app)
 
-    # Register Blueprints
+
     from project.routes.auth_routes import auth_bp
     app.register_blueprint(auth_bp)
 

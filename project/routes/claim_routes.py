@@ -1,17 +1,15 @@
-# This is our "Food Claiming Room".
-# It defines the public-facing URL for users to claim food items.
+
 
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from project.models.claim_model import create_claim
 
-# --- CHANGE 1: We are removing the url_prefix from the blueprint ---
 claim_bp = Blueprint('claim', __name__)
 
 
-# --- CHANGE 2: We are putting the full path on the route itself ---
+
 @claim_bp.route('/claim', methods=['POST'])
-@jwt_required() # This protects the endpoint
+@jwt_required() 
 def make_claim():
     """
     Protected endpoint for a user to claim a quantity of a food listing.
