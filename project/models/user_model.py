@@ -1,56 +1,49 @@
 # This is our "User Filing Clerk".
-# It contains functions that interact directly with the 'users' table in our database.
+# This version uses the new, robust, shared database connection.
 
-from project.db import get_db_connection
+from project.db import get_db # <-- CHANGE: Import get_db
 
-def create_user(name, email, hashed_password):
+def create_user(name, email, password_hash):
     """
-    Inserts a new user into the users table.
-    Takes a name, email, and a pre-hashed password as arguments.
+    Inserts a new user into the database.
     """
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    sql = "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)"
-    
     try:
-        cursor.execute(sql, (name, email, hashed_password))
-        conn.commit()
+        conn = get_db() # <-- CHANGE: Use the new get_db() function
+        cursor = conn.cursor()
+        
+        # We assume new registrations are 'business' type for simplicity
+        sql = "INSERT INTO users (name, email, password_hash, user_type) VALUES (%s, %s, %s, 'business')"
+        cursor.execute(sql, (name, email, password_hash))
+        
+        # This command makes the new user permanent for this request.
+        conn.commit() 
+        
+        cursor.close()
+        # No conn.close() needed here anymore! The system handles it.
         return True
     except Exception as e:
-        print(f"Error creating user: {e}")
+        print(f"Database error in create_user: {e}")
+        # If there's an error (like a duplicate email), we undo the change.
         conn.rollback()
         return False
-    finally:
-        cursor.close()
-        conn.close()
-
-# --- NEW FUNCTION ADDED BELOW ---
 
 def find_user_by_email(email):
     """
-    Finds a user in the database by their email address.
-    Returns the user's data if found, otherwise returns None.
+    Finds a user by their email address.
     """
-    conn = get_db_connection()
-    # We use a dictionary cursor to get results as a dictionary (e.g., {'id': 1, 'name': 'Test'})
-    # which is easier to work with than a tuple.
-    cursor = conn.cursor(dictionary=True)
-    
-    sql = "SELECT * FROM users WHERE email = %s"
-    
+    user = None # <-- FIX: Corrected variable declaration
     try:
-        # We only need to find one user, so the tuple has only one item.
-        cursor.execute(sql, (email,))
+        conn = get_db() # <-- CHANGE: Use the new get_db() function
+        cursor = conn.cursor(dictionary=True)
         
-        # 'fetchone()' retrieves the first matching row from the query results.
+        sql = "SELECT * FROM users WHERE email = %s"
+        cursor.execute(sql, (email,))
         user = cursor.fetchone()
         
-        # Return the user dictionary if found, or None if no user matched the email.
-        return user
-    except Exception as e:
-        print(f"Error finding user: {e}")
-        return None
-    finally:
         cursor.close()
-        conn.close()
+        # No conn.close() needed here anymore!
+    except Exception as e:
+        print(f"Database error in find_user_by_email: {e}")
+    
+    return user
 

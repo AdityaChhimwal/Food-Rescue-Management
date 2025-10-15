@@ -1,31 +1,29 @@
 # This is our "Claim Filing Clerk".
-# It handles all database operations related to food claims.
+# This version uses the new, robust, shared database connection.
 
-from project.db import get_db_connection
+from project.db import get_db # <-- CHANGE: Import get_db
 
 def create_claim(listing_id, user_id, quantity_claimed):
     """
     Inserts a new claim into the database.
-    The database trigger will automatically handle updating the food listing's quantity.
     """
     try:
-        conn = get_db_connection()
+        conn = get_db() # <-- CHANGE: Use the new get_db() function
         cursor = conn.cursor()
         
-        # The SQL command to insert a new row into the claims table.
         sql = "INSERT INTO claims (listing_id, user_id, quantity_claimed) VALUES (%s, %s, %s)"
         
-        # Execute the command with the provided data
         cursor.execute(sql, (listing_id, user_id, quantity_claimed))
         
-        # Commit the changes to make them permanent
+        # This command makes the new claim permanent for this request.
         conn.commit()
         
         cursor.close()
-        conn.close()
-        
+        # No conn.close() needed here anymore! The system handles it.
         return True
     except Exception as e:
-        # If any error occurs, print it for debugging
         print(f"Database error in create_claim: {e}")
+        # If there's an error, we undo the change.
+        get_db().rollback()
         return False
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Food Rescue</title>
+    <!-- Link to our future CSS file for styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Navigation Bar -->
+    <nav>
+        <h1>Community Food Rescue</h1>
+        <div id="auth-links">
+            <button id="login-nav-btn">Login</button>
+        </div>
+        <div id="user-info" class="hidden">
+            <span id="user-email"></span>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main container for all page content -->
+    <main class="container">
+
+        <!-- Login and Registration Section -->
+        <section id="login-section" class="card">
+            <div id="login-form-container">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="show-register-link">Register here</a></p>
+            </div>
+            
+            <div id="register-form-container" class="hidden">
+                <h2>Register</h2>
+                <form id="register-form">
+                    <input type="text" id="register-name" placeholder="Full Name or Business Name" required>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="#" id="show-login-link">Login here</a></p>
+            </div>
+        </section>
+
+        <!-- Section to Add a New Food Listing (hidden by default) -->
+        <section id="add-listing-section" class="card hidden">
+            <h2>Add New Food Listing</h2>
+            <form id="add-listing-form">
+                <input type="text" id="listing-title" placeholder="Food Item Title (e.g., Large Cheese Pizza)" required>
+                <textarea id="listing-description" placeholder="Description" required></textarea>
+                <input type="number" id="listing-quantity" placeholder="Quantity" required>
+                <input type="number" id="listing-price" placeholder="Price (e.g., 3.00)" step="0.01" required>
+                <input type="datetime-local" id="listing-expiry" required>
+                <button type="submit">Add Listing</button>
+            </form>
+        </section>
+
+        <!-- Section to Display All Available Food Listings -->
+        <section id="listings-section">
+            <h2>Available Food</h2>
+            <div id="listings-container">
+                <!-- Food listings will be dynamically inserted here by JavaScript -->
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Link to our future JavaScript file for functionality. 'defer' makes it load after the HTML. -->
+    <script src="script.js"></script>
+</body>
+</html>
+
